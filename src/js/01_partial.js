@@ -29,7 +29,9 @@ const SearchButton = document.querySelector('.js__search--button');
 
 const getSeriesFromApi = () => {
   const seriename = document.querySelector('.js-input').value;
-  fetch(`http://api.tvmaze.com/search/shows?q=${seriename}`)
+  const serieURL = `http://api.tvmaze.com/search/shows?q=${seriename}`;
+
+  fetch(serieURL)
     .then((response) => response.json())
     .then((data) => seriesContentFilter(data)); //respuesta filtrada
 };
