@@ -1,5 +1,9 @@
 'use strict';
 //Filtrar contenido por name e image(medium)
+
+//emptyImage
+const emptyImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+
 let filteredData = []; // Es un array pq filtramos los datos de data, que es otro array.
 const seriesContentFilter = (data) => {
   // Bucle que recorre data (es la respuesta de la promesa convertida en json)
@@ -13,20 +17,18 @@ const seriesContentFilter = (data) => {
 
     // Añadir al final del array filteredItem, que son los campo filtrados de item
     filteredData.push(filteredItem);
-    console.log(filteredItem);
   }
 
   return filteredData;
 };
 
 //Pintar lista de series
+
 const paintList = () => {
   //Seleccionar el elemnto donde poner la informacion ---> ul
   const list = document.querySelector('.js-list');
 
   for (const item of filteredData) {
-    const emptyImage =
-      'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
     //creamos los elementos de la lista
     const li = document.createElement('li');
 
@@ -37,7 +39,7 @@ const paintList = () => {
 
     serieName.innerHTML = item.name;
     seriePicture.innerHTML = item.image;
-
+    //para las imágenes vacías metemos una fake image
     if (item.image === null) {
       seriePicture.src = emptyImage;
     } else {
@@ -49,33 +51,16 @@ const paintList = () => {
     list.appendChild(li);
     li.appendChild(serieName);
     li.appendChild(seriePicture);
-
-    li.addEventListener('click', favouriteSerie);
+    li.addEventListener('click', paintFavouriteList);
   }
+  // console.log(filteredData);
 };
 
 //Pintar lista de series favoritas
-const paintFavouriteList = () => {
+function paintFavouriteList(ev) {
   const list = document.querySelector('.js-favourites-list');
-
-  for (const item of filteredData) {
-    const li = document.createElement('li');
-
-    const serieName = document.createElement('h3');
-    serieName.classList.add('name');
-    const seriePicture = document.createElement('img');
-    seriePicture.classList.add('image');
-
-    serieName.innerHTML = item.name;
-    seriePicture.innerHTML = item.image.medium;
-    seriePicture.src = item.image.medium;
-    seriePicture.alt = 'Imagen de mi serie favorita';
-
-    list.appendChild(li);
-    li.appendChild(serieName);
-    li.appendChild(seriePicture);
-  }
-};
+  list.innerHTML += ev.currentTarget.innerHTML;
+}
 
 //Llamar a la API
 
@@ -90,9 +75,3 @@ const getSeriesFromApi = () => {
 };
 
 SearchButton.addEventListener('click', getSeriesFromApi);
-
-//Funcion marca favoritos
-function favouriteSerie(ev) {
-  ev.currentTarget.classList.toggle('background');
-  paintFavouriteList();
-}
