@@ -20,12 +20,45 @@ const seriesContentFilter = (data) => {
 };
 
 //Pintar lista de series
-const paintList = (data) => {
+const paintList = () => {
   //Seleccionar el elemnto donde poner la informacion ---> ul
   const list = document.querySelector('.js-list');
 
   for (const item of filteredData) {
+    const emptyImage =
+      'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
     //creamos los elementos de la lista
+    const li = document.createElement('li');
+
+    const serieName = document.createElement('h3');
+    serieName.classList.add('name');
+    const seriePicture = document.createElement('img');
+    seriePicture.classList.add('image');
+
+    serieName.innerHTML = item.name;
+    seriePicture.innerHTML = item.image;
+
+    if (item.image === null) {
+      seriePicture.src = emptyImage;
+    } else {
+      seriePicture.src = item.image.medium;
+    }
+    seriePicture.alt = 'Imagen de serie';
+
+    //Añadimos los elementos al ul
+    list.appendChild(li);
+    li.appendChild(serieName);
+    li.appendChild(seriePicture);
+
+    li.addEventListener('click', favouriteSerie);
+  }
+};
+
+//Pintar lista de series favoritas
+const paintFavouriteList = () => {
+  const list = document.querySelector('.js-favourites-list');
+
+  for (const item of filteredData) {
     const li = document.createElement('li');
 
     const serieName = document.createElement('h3');
@@ -36,16 +69,13 @@ const paintList = (data) => {
     serieName.innerHTML = item.name;
     seriePicture.innerHTML = item.image.medium;
     seriePicture.src = item.image.medium;
-    seriePicture.alt = 'Imagen de serie';
+    seriePicture.alt = 'Imagen de mi serie favorita';
 
-    //Añadimos los elementos al ul
     list.appendChild(li);
     li.appendChild(serieName);
     li.appendChild(seriePicture);
   }
 };
-
-//Pintar lista de series favoritas
 
 //Llamar a la API
 
@@ -60,3 +90,9 @@ const getSeriesFromApi = () => {
 };
 
 SearchButton.addEventListener('click', getSeriesFromApi);
+
+//Funcion marca favoritos
+function favouriteSerie(ev) {
+  ev.currentTarget.classList.toggle('background');
+  paintFavouriteList();
+}
