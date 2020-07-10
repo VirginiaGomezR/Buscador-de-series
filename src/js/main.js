@@ -13,6 +13,7 @@ const seriesContentFilter = (data) => {
     let filteredItem = {
       name: item.show.name,
       image: item.show.image,
+      id: item.show.id,
     };
 
     // Añadir al final del array filteredItem, que son los campo filtrados de item
@@ -31,6 +32,7 @@ const paintList = () => {
   for (const item of filteredData) {
     //creamos los elementos de la lista
     const li = document.createElement('li');
+    li.setAttribute('id', `${item.id}`);
 
     const serieName = document.createElement('h3');
     serieName.classList.add('name');
@@ -39,6 +41,8 @@ const paintList = () => {
 
     serieName.innerHTML = item.name;
     seriePicture.innerHTML = item.image;
+
+    //li.setAttribute('id', `data-index = ${item.id}`);
     //para las imágenes vacías metemos una fake image
     if (item.image === null) {
       seriePicture.src = emptyImage;
@@ -56,11 +60,36 @@ const paintList = () => {
   // console.log(filteredData);
 };
 
+let favourites = [];
+
 //Pintar lista de series favoritas
 function paintFavouriteList(ev) {
   const list = document.querySelector('.js-favourites-list');
+
   list.innerHTML += ev.currentTarget.innerHTML;
+  ev.currentTarget.classList.toggle('background');
+
+  favourites.push(ev.currentTarget.innerHTML);
+
+  console.log(favourites);
+  updateLocalStorage();
 }
+
+//LocalStorage
+const updateLocalStorage = () => {
+  localStorage.setItem('series', JSON.stringify(favourites));
+};
+
+//local storage: leer los datos
+
+const getLocalStorage = () => {
+  const savedSeries = JSON.parse(localStorage.getItem('series'));
+
+  if (savedSeries !== null) {
+    //console.log(savedSeries);
+    favourites = savedSeries;
+  }
+};
 
 //Llamar a la API
 
@@ -75,3 +104,4 @@ const getSeriesFromApi = () => {
 };
 
 SearchButton.addEventListener('click', getSeriesFromApi);
+document.addEventListener('load', getLocalStorage);
