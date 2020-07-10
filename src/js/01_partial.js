@@ -23,9 +23,9 @@ const seriesContentFilter = (data) => {
   return filteredData;
 };
 
-//Llamar a la API
-
 const SearchButton = document.querySelector('.js__search--button');
+
+//Llamar a la API
 
 const getSeriesFromApi = () => {
   const seriename = document.querySelector('.js-input').value;
