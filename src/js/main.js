@@ -1,11 +1,30 @@
 'use strict';
-//Filtrar contenido por name e image(medium)
-
-//emptyImage
+const endpointSeries = 'http://api.tvmaze.com/search/shows?q=';
 const emptyImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+const searchButton = document.querySelector('.js__search--button');
+const resetButton = document.querySelector('.reset');
 
-let filteredData = []; // Es un array pq filtramos los datos de data, que es otro array.
+let series = [];
+let favorites = [];
+
+//LocalStorage
+const setItemLocalStorage = () => {
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+};
+
+//local storage: leer los datos
+
+const getItemLocalStorage = () => {
+  const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
+
+  if (savedFavorites !== null) {
+    favorites = savedFavorites;
+    console.log(favorites);
+  }
+};
+
 const seriesContentFilter = (data) => {
+  series = [];
   // Bucle que recorre data (es la respuesta de la promesa convertida en json)
   for (const item of data) {
     // Es la variable que recoge los campos que nos interesan de item.
@@ -17,32 +36,73 @@ const seriesContentFilter = (data) => {
     };
 
     // Añadir al final del array filteredItem, que son los campo filtrados de item
-    filteredData.push(filteredItem);
+    series.push(filteredItem);
   }
-
-  return filteredData;
 };
 
-//Pintar lista de series
+//Función manejadora
 
+function handlerFavouriteList(ev) {
+  savedFavourites(ev);
+  paintFavouriteList();
+}
+
+//Funcion para guardar en favoritos
+function savedFavourites(ev) {
+  console.log(ev.currentTarget);
+  const foundFavorite = favorites.find(
+    (item) => item.id === parseInt(ev.currentTarget.id) // condición que compara el id clickado con el id en favoritos y devuelve el objeto de serie o undefinded
+  );
+
+  if (foundFavorite === undefined) {
+    //no lo encuentra
+    const dataSerie = series.find(
+      (item) => item.id === parseInt(ev.currentTarget.id)
+    ); //busca la información de ese id en el array de series y devuelve el objeto de serie o undefined
+    if (dataSerie !== undefined) {
+      //lo encuentra
+
+      favorites.push(dataSerie);
+      setItemLocalStorage();
+    }
+  }
+}
+
+//Funcion para eliminar favoritos
+
+function deleteFavourites(ev) {
+  favorites = favorites.filter(
+    //machacamos el array de favoritos con todos los elementos menos el clickado
+    (item) => item.id !== parseInt(ev.currentTarget.id)
+  );
+  setItemLocalStorage();
+}
+
+//Funcion para mostrar un listado de series
 const paintList = () => {
   //Seleccionar el elemnto donde poner la informacion ---> ul
-  const list = document.querySelector('.js-list');
 
-  for (const item of filteredData) {
+  const list = document.querySelector('.js-list');
+  list.innerHTML = '';
+
+  for (const item of series) {
     //creamos los elementos de la lista
     const li = document.createElement('li');
-    li.setAttribute('id', `${item.id}`);
-
+    const foundFavorite = favorites.find(
+      (itemFavorite) => itemFavorite.id === item.id
+    );
+    if (foundFavorite !== undefined) {
+      li.classList.add('background');
+    }
     const serieName = document.createElement('h3');
     serieName.classList.add('name');
     const seriePicture = document.createElement('img');
     seriePicture.classList.add('image');
 
+    li.setAttribute('id', item.id);
     serieName.innerHTML = item.name;
     seriePicture.innerHTML = item.image;
 
-    //li.setAttribute('id', `data-index = ${item.id}`);
     //para las imágenes vacías metemos una fake image
     if (item.image === null) {
       seriePicture.src = emptyImage;
@@ -51,57 +111,83 @@ const paintList = () => {
     }
     seriePicture.alt = 'Imagen de serie';
 
+    //
+
     //Añadimos los elementos al ul
     list.appendChild(li);
     li.appendChild(serieName);
     li.appendChild(seriePicture);
-    li.addEventListener('click', paintFavouriteList);
+    li.addEventListener('click', handlerFavouriteList);
   }
-  // console.log(filteredData);
 };
 
-let favourites = [];
+//Funcion pintar favoritos
 
-//Pintar lista de series favoritas
-function paintFavouriteList(ev) {
-  const list = document.querySelector('.js-favourites-list');
+function paintFavouriteList() {
+  const list = document.querySelector('.js-favorites-list');
+  list.innerHTML = '';
 
-  list.innerHTML += ev.currentTarget.innerHTML;
-  ev.currentTarget.classList.toggle('background');
+  for (const item of favorites) {
+    const li = document.createElement('li');
 
-  favourites.push(ev.currentTarget.innerHTML);
+    li.setAttribute('id', item.id);
 
-  console.log(favourites);
-  updateLocalStorage();
+    const serieName = document.createElement('h3');
+    serieName.classList.add('name');
+    const seriePicture = document.createElement('img');
+    seriePicture.classList.add('image');
+    const span = document.createElement('span');
+    span.classList.add('delete');
+    span.setAttribute('id', item.id);
+
+    span.innerHTML = 'X';
+    serieName.innerHTML = item.name;
+    seriePicture.innerHTML = item.image;
+
+    if (item.image === null) {
+      seriePicture.src = emptyImage;
+    } else {
+      seriePicture.src = item.image.medium;
+    }
+    seriePicture.alt = 'Imagen de serie favorita';
+
+    list.appendChild(li);
+    li.appendChild(span);
+    li.appendChild(serieName);
+    li.appendChild(seriePicture);
+    span.addEventListener('click', handlerDeleteFavourites);
+  }
 }
 
-//LocalStorage
-const updateLocalStorage = () => {
-  localStorage.setItem('series', JSON.stringify(favourites));
-};
+//Función manejadora que elimina favoritos
 
-//local storage: leer los datos
+function handlerDeleteFavourites(ev) {
+  deleteFavourites(ev);
+  paintFavouriteList();
+}
 
-const getLocalStorage = () => {
-  const savedSeries = JSON.parse(localStorage.getItem('series'));
-
-  if (savedSeries !== null) {
-    //console.log(savedSeries);
-    favourites = savedSeries;
-  }
-};
-
-//Llamar a la API
-
-const SearchButton = document.querySelector('.js__search--button');
+//Funcion para obtener datos de endpoint
 
 const getSeriesFromApi = () => {
-  const seriename = document.querySelector('.js-input').value;
-  fetch(`http://api.tvmaze.com/search/shows?q=${seriename}`)
+  const serieName = document.querySelector('.js-input').value;
+  fetch(`${endpointSeries}${serieName}`)
     .then((response) => response.json())
     .then((data) => seriesContentFilter(data)) //respuesta filtrada
-    .then((dataFiltered) => paintList());
+    .then(() => paintList());
 };
 
-SearchButton.addEventListener('click', getSeriesFromApi);
-document.addEventListener('load', getLocalStorage);
+searchButton.addEventListener('click', getSeriesFromApi);
+
+//reset, vaciar favoritos
+
+function resetFavorites() {
+  favorites = [];
+  localStorage.removeItem('favorites');
+  paintFavouriteList();
+}
+
+resetButton.addEventListener('click', resetFavorites);
+
+// Obtener datos de localStorage y pintarlos
+getItemLocalStorage();
+paintFavouriteList();
