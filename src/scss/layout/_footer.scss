@@ -1,8 +1,12 @@
 .page__footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
-  padding: 1rem;
-  color: $color-secondary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container__footer {
+  width: 100%;
+  background-color: $color-secondary;
+  height: 12rem;
 }
