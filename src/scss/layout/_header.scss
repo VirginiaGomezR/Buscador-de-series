@@ -1,18 +1,13 @@
-.page__header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .container__search {
   width: 100%;
+  position: fixed;
+  top: 0px;
   background-color: $color-secondary;
   height: 12rem;
 
   &--title {
     color: $color-title;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
   }
