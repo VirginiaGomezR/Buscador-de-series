@@ -19,7 +19,6 @@ const getItemLocalStorage = () => {
 
   if (savedFavorites !== null) {
     favorites = savedFavorites;
-    console.log(favorites);
   }
 };
 
@@ -49,7 +48,6 @@ function handlerFavouriteList(ev) {
 
 //Funcion para guardar en favoritos
 function savedFavourites(ev) {
-  console.log(ev.currentTarget);
   const foundFavorite = favorites.find(
     (item) => item.id === parseInt(ev.currentTarget.id) // condición que compara el id clickado con el id en favoritos y devuelve el objeto de serie o undefinded
   );
@@ -129,7 +127,7 @@ function paintFavouriteList() {
 
   for (const item of favorites) {
     const li = document.createElement('li');
-    li.classList.add('js-list-favorites');
+
     li.setAttribute('id', item.id);
 
     const serieName = document.createElement('h3');

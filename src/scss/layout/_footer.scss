@@ -2,7 +2,6 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  border: 1px solid red;
   background-color: $color-secondary;
   height: 6rem;
 
@@ -20,9 +19,9 @@
     width: 30%;
     height: 10%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 1rem;
 
-    @media all and (min-width: 768px) {
+    @include tablet {
       width: 8%;
     }
 

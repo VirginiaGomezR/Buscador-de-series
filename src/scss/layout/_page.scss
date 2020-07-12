@@ -1,89 +1,111 @@
 .container__favorites--section {
   display: block;
+  background-color: $color-light;
   width: 100%;
   position: fixed;
-  top: 190px;
+  top: 192px;
+  z-index: 1;
 
-  @media all and (min-width: 768px) {
+  @include tablet {
     width: 30%;
   }
 }
 
 .container__favorites {
+  padding-top: 10px;
+
   &--list {
     overflow-y: auto;
-    height: 15rem;
+    height: 5rem;
   }
-
   &--title {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
-    margin-top: 10px;
   }
+
   .js-reset {
     background-color: $color-third;
     display: block;
     color: $color-light;
-    font-weight: bold;
     margin: 10px auto;
-    border-radius: 30px;
+    border-radius: 2rem;
     padding: 5px;
+    font-family: $font-main;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #099d8d;
+      color: #fff;
+    }
+  }
+
+  .js-name-favorites {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .js-image-favorites {
+    display: block;
+    margin: auto;
+    width: 50px;
+  }
+
+  .js-delete {
+    color: $color-secondary;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: $font-main;
+  }
+
+  @include tablet {
+    &--list {
+      overflow-y: auto;
+      height: 15rem;
+    }
   }
 }
 
 .container__series--section {
-  display: block;
-  top: 190px;
   width: 100%;
+  display: block;
   position: absolute;
-  right: 0px;
-
-  @media all and (min-width: 768px) {
+  top: 190px;
+  @include tablet {
     width: 70%;
+    right: 0;
   }
 }
 
 .container__series {
   width: 100%;
+  padding-top: 10px;
+
+  .background {
+    background-color: $color-primary;
+  }
+
+  .js-name {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: $font-main;
+  }
+
+  .js-image {
+    display: block;
+    margin: auto;
+  }
 }
 
 .js-list {
-  display: grid;
-  grid-template-columns: repeat(3, 05fr);
-  grid-gap: 10px;
-}
-
-.js-name {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
-  font-family: 'Roboto', sans-serif;
-}
-
-.js-image {
   display: block;
   margin: auto;
-}
 
-.js-name-favorites {
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.js-image-favorites {
-  display: block;
-  margin: auto;
-  width: 50px;
-}
-
-.background {
-  background-color: $color-primary;
-}
-
-.js-delete {
-  color: $color-secondary;
-  font-weight: bold;
-  font-size: 20px;
+  @include tablet {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    grid-gap: 0.5rem;
+  }
 }

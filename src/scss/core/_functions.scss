@@ -1,5 +1,0 @@
-/*Function convert pixels to rem*/
-
-@function rem($pixels) {
-  @return ($pixels / $font-regular * 1rem);
-}

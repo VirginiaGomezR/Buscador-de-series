@@ -1,9 +1,8 @@
 .container__search {
   width: 100%;
   position: fixed;
-  top: 0px;
+  top: 0;
   background-color: rgba(10, 10, 10, 0.8);
-
   height: 12rem;
   z-index: 1;
 
@@ -12,12 +11,14 @@
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+    font-family: $font-main;
   }
 
   &--input {
     width: 10rem;
     margin: auto;
     display: block;
+    font-family: $font-main;
   }
 
   &--button {
@@ -29,6 +30,7 @@
     background-color: $color-third;
     border-radius: 5%;
     color: $color-light;
-    font-weight: bold;
+    font-family: $font-main;
+    cursor: pointer;
   }
 }
