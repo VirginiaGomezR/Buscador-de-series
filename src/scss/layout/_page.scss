@@ -1,5 +1,19 @@
+.container__series {
+  width: 50%;
+  border: 1px solid red;
+}
+
+.container__favorites {
+  width: 50%;
+
+  border: 1px solid green;
+  .reset {
+    background-color: $color-third;
+  }
+}
+
 .background {
-  background-color: green;
+  background-color: $color-primary;
 }
 
 .delete {

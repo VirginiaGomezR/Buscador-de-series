@@ -1,5 +1,37 @@
 .page__header {
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container__search {
+  width: 100%;
+  background-color: $color-secondary;
+  height: 12rem;
+
+  &--title {
+    color: $color-title;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &--input {
+    width: 10rem;
+    margin: auto;
+    display: block;
+  }
+
+  &--button {
+    text-transform: capitalize;
+    width: 5rem;
+    margin: auto;
+    display: block;
+    margin-top: 1rem;
+    background-color: $color-third;
+    border-radius: 5%;
+    color: $color-light;
+    font-weight: bold;
+  }
 }
