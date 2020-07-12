@@ -2,7 +2,7 @@
 const endpointSeries = 'http://api.tvmaze.com/search/shows?q=';
 const emptyImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
 const searchButton = document.querySelector('.js__search--button');
-const resetButton = document.querySelector('.reset');
+const resetButton = document.querySelector('.js-reset');
 
 let series = [];
 let favorites = [];
@@ -95,9 +95,9 @@ const paintList = () => {
       li.classList.add('background');
     }
     const serieName = document.createElement('h3');
-    serieName.classList.add('name');
+    serieName.classList.add('js-name');
     const seriePicture = document.createElement('img');
-    seriePicture.classList.add('image');
+    seriePicture.classList.add('js-image');
 
     li.setAttribute('id', item.id);
     serieName.innerHTML = item.name;
@@ -133,14 +133,14 @@ function paintFavouriteList() {
     li.setAttribute('id', item.id);
 
     const serieName = document.createElement('h3');
-    serieName.classList.add('name');
+    serieName.classList.add('js-name-favorites');
     const seriePicture = document.createElement('img');
-    seriePicture.classList.add('image');
+    seriePicture.classList.add('js-image-favorites');
     const span = document.createElement('span');
-    span.classList.add('delete');
+    span.classList.add('js-delete');
     span.setAttribute('id', item.id);
 
-    span.innerHTML = 'X';
+    span.innerHTML = 'x';
     serieName.innerHTML = item.name;
     seriePicture.innerHTML = item.image;
 
