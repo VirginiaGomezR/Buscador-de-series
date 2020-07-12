@@ -12,6 +12,8 @@ Al hacer clic sobre una serie debe pasar lo siguiente:
 - La serie marcada se mostrará en un listado a la izquierda de la pantalla. 
 - Las series favoritas aparecerań a la izquierda aunque la usuaria realice otra búsqueda.
 
+Si realizamos una nueva búsqueda y sale una serie que ya es favorita, aparezca ya resaltada en los resultados de búsqueda (con colores de fondo y texto intercambiados).
+
 Eliminar favoritos
 --------------------------
 Todas las series marcadas como favoritas podrán eliminarse de dos formas:
