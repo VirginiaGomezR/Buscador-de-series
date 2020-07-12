@@ -16,7 +16,7 @@ Eliminar favoritos
 --------------------------
 Todas las series marcadas como favoritas podrán eliminarse de dos formas:
 
-_ Mediante un botón situado en la parte izquierda del navegador "Vaciar favoritos".
+- Mediante un botón situado en la parte izquierda del navegador "Vaciar favoritos".
 - Mediante el aspa de cierre situado en cada uno de los favoritos almacenados.
 
 
