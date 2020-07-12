@@ -14,4 +14,20 @@
     position: relative;
     top: 50%;
   }
+
+  .logo_adalab {
+    display: block;
+    width: 30%;
+    height: 10%;
+    margin: auto;
+    margin-top: 10px;
+
+    @media all and (min-width: 768px) {
+      width: 8%;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
 }
