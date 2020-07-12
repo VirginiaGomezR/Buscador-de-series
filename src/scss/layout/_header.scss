@@ -2,8 +2,10 @@
   width: 100%;
   position: fixed;
   top: 0px;
-  background-color: $color-secondary;
+  background-color: rgba(10, 10, 10, 0.8);
+
   height: 12rem;
+  z-index: 1;
 
   &--title {
     color: $color-title;
