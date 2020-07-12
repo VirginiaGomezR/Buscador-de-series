@@ -4,6 +4,7 @@
   width: 100%;
   position: fixed;
   top: 190px;
+  z-index: 1;
 
   @media all and (min-width: 768px) {
     width: 30%;
