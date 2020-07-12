@@ -4,15 +4,18 @@
   width: 100%;
   position: fixed;
   top: 190px;
-  z-index: 1;
 
   @media all and (min-width: 768px) {
     width: 30%;
-    display: inline-block;
   }
 }
 
 .container__favorites {
+  &--list {
+    overflow-y: auto;
+    height: 25rem;
+  }
+
   &--title {
     font-size: 16px;
     font-weight: bold;
@@ -33,20 +36,32 @@
 .container__series--section {
   border: 2px solid red;
   display: block;
-  position: relative;
+  //position: relative;
   top: 190px;
-
   width: 100%;
+  position: absolute;
+  right: 0px;
 
   @media all and (min-width: 768px) {
-    display: inline-block;
+    width: 70%;
   }
+}
+
+.container__series {
+  width: 100%;
+}
+
+.js-list {
+  display: grid;
+  grid-template-columns: repeat(3, 05fr);
+  grid-gap: 10px;
 }
 
 .js-name {
   text-align: center;
-  font-size: 24px;
+  font-size: 1rem;
   font-weight: bold;
+  font-family: 'Roboto', sans-serif;
 }
 
 .js-image {

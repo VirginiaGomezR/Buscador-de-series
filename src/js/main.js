@@ -129,7 +129,7 @@ function paintFavouriteList() {
 
   for (const item of favorites) {
     const li = document.createElement('li');
-
+    li.classList.add('js-list-favorites');
     li.setAttribute('id', item.id);
 
     const serieName = document.createElement('h3');
