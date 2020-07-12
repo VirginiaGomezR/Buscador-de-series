@@ -1,8 +1,17 @@
-.page__footer {
+.container__footer {
   position: fixed;
-  left: 0;
   bottom: 0;
-  width: 100vw;
-  padding: 1rem;
-  color: $color-secondary;
+  width: 100%;
+  border: 1px solid red;
+  background-color: $color-secondary;
+  height: 6rem;
+
+  .copyright {
+    color: $color-light;
+    font-size: 0.5rem;
+    display: block;
+    text-align: center;
+    position: relative;
+    top: 50%;
+  }
 }
