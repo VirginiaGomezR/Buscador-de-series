@@ -3,19 +3,19 @@
   position: fixed;
   top: 0;
   background-color: rgba(10, 10, 10, 0.8);
-  height: 12rem;
+  height: 192px;
   z-index: 1;
 
   &--title {
-    color: $color-title;
-    font-size: 2rem;
+    color: $color-light;
+    font-size: 32px;
     font-weight: bold;
     text-align: center;
     font-family: $font-main;
   }
 
   &--input {
-    width: 10rem;
+    width: 160px;
     margin: auto;
     display: block;
     font-family: $font-main;
@@ -23,10 +23,10 @@
 
   &--button {
     text-transform: capitalize;
-    width: 5rem;
+    width: 80px;
     margin: auto;
     display: block;
-    margin-top: 1rem;
+    margin-top: 16px;
     background-color: $color-third;
     border-radius: 5%;
     color: $color-light;

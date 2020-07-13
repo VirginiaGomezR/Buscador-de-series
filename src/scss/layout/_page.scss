@@ -1,27 +1,34 @@
 .container__favorites--section {
   display: block;
-  background-color: $color-light;
   width: 100%;
   position: fixed;
   top: 192px;
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
 
   @include tablet {
     width: 30%;
+    height: 100vh;
+    z-index: 0;
   }
 }
 
 .container__favorites {
-  padding-top: 10px;
+  width: 100%;
 
   &--list {
     overflow-y: auto;
-    height: 5rem;
+    height: 80px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   &--title {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 20px;
     text-align: center;
+    padding-top: 10px;
+    font-family: $font-main;
   }
 
   .js-reset {
@@ -29,21 +36,23 @@
     display: block;
     color: $color-light;
     margin: 10px auto;
-    border-radius: 2rem;
+    border-radius: 32px;
     padding: 5px;
     font-family: $font-main;
     cursor: pointer;
+    font-size: 12px;
 
     &:hover {
-      background-color: #099d8d;
-      color: #fff;
+      background-color: $color-primary;
+      color: $color-light;
     }
   }
 
   .js-name-favorites {
     text-align: center;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: bold;
+    color: $color-primary;
   }
 
   .js-image-favorites {
@@ -55,14 +64,19 @@
   .js-delete {
     color: $color-secondary;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 16px;
     font-family: $font-main;
+  }
+
+  .js-list-li {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    padding: 5px;
   }
 
   @include tablet {
     &--list {
-      overflow-y: auto;
-      height: 15rem;
+      height: 300px;
     }
   }
 }
@@ -72,6 +86,7 @@
   display: block;
   position: absolute;
   top: 190px;
+
   @include tablet {
     width: 70%;
     right: 0;
@@ -83,12 +98,13 @@
   padding-top: 10px;
 
   .background {
+    padding: 10px;
     background-color: $color-primary;
   }
 
   .js-name {
     text-align: center;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: bold;
     font-family: $font-main;
   }
@@ -96,6 +112,7 @@
   .js-image {
     display: block;
     margin: auto;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   }
 }
 
@@ -106,6 +123,6 @@
   @include tablet {
     display: grid;
     grid-template-columns: repeat(3, 0.5fr);
-    grid-gap: 0.5rem;
+    grid-gap: 8px;
   }
 }

@@ -39,13 +39,6 @@ const seriesContentFilter = (data) => {
   }
 };
 
-//Función manejadora
-
-function handlerFavouriteList(ev) {
-  savedFavourites(ev);
-  paintFavouriteList();
-}
-
 //Funcion para guardar en favoritos
 function savedFavourites(ev) {
   const foundFavorite = favorites.find(
@@ -127,7 +120,7 @@ function paintFavouriteList() {
 
   for (const item of favorites) {
     const li = document.createElement('li');
-
+    li.classList.add('js-list-li');
     li.setAttribute('id', item.id);
 
     const serieName = document.createElement('h3');
@@ -157,11 +150,19 @@ function paintFavouriteList() {
   }
 }
 
+//Función manejadora
+
+function handlerFavouriteList(ev) {
+  savedFavourites(ev);
+  paintFavouriteList();
+  paintList();
+}
 //Función manejadora que elimina favoritos
 
 function handlerDeleteFavourites(ev) {
   deleteFavourites(ev);
   paintFavouriteList();
+  paintList();
 }
 
 //Funcion para obtener datos de endpoint
@@ -182,6 +183,7 @@ function resetFavorites() {
   favorites = [];
   localStorage.removeItem('favorites');
   paintFavouriteList();
+  paintList();
 }
 
 resetButton.addEventListener('click', resetFavorites);
