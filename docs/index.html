@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ejercicio evaluación final</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="icon" href="./assets/images/favicon.png" />
+  </head>
+
+  <body>
+    <header class="page__header">
+      <div class="container__search">
+        <h1 class="container__search--title">
+          <label for="series">Buscador de series</label>
+        </h1>
+        <input
+          class="container__search--input js-input"
+          type="text"
+          id="series"
+          name="series"
+        />
+        <button class="container__search--button js__search--button" type="submit">
+          buscar
+        </button>
+      </div>
+    </header>
+
+    <main class="page__main">
+      <section class="container__favorites--section">
+        <div class="container__favorites">
+          <h2 class="container__favorites--title">Mis series favoritas</h2>
+          <ul class="container__favorites--list js-favorites-list">
+            <!-- Listado de series favoritas -->
+          </ul>
+          <button type="button" class="js-reset">Vaciar favoritos</button>
+        </div>
+      </section>
+      <section class="container__series--section">
+        <div class="container__series">
+          <ul class="container__series--list js-list">
+            <!-- Listado de series -->
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page__footer">
+      <div class="container__footer">
+        <div class="logo_adalab">
+          <img src="./assets/images/logo-adalab.png" alt="Adalab" />
+        </div>
+        <small class="copyright">
+          &copy; Todos los derechos reservados
+        </small>
+      </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
